@@ -4,6 +4,8 @@ from functools import reduce
 
 
 def print_multiply_table(a: int, b: int):
+    """Вывести в консоль таблицу умножения."""
+
     [print(*reduce(lambda x, y: f'{x}\t{y}',
                    [row_num * col_num for col_num in range(1, b+1)]))
      for row_num in range(1, a+1)]
