@@ -1,6 +1,6 @@
 import os
 
-def print_directory_contents(sPath):
+def print_directory_contents(sPath: str):
     """
     Функция принимает имя каталога и распечатывает его содержимое
     в виде «путь и имя файла», а также любые другие
