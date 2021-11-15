@@ -1,23 +1,29 @@
-"""Скрипт выводящий в консоль таблицу умножения размерностью A x B"""
-
-from functools import reduce
-
-
-def print_multiply_table(a: int, b: int):
-    """Вывести в консоль таблицу умножения."""
-
-    [print(*reduce(lambda x, y: f'{x}\t{y}',
-                   [row_num * col_num for col_num in range(1, b+1)]))
-     for row_num in range(1, a+1)]
+class ItemDiscount:
+    def __init__(self, name, price):
+        self.name = name
+        self.price = price
 
 
-print('Вывод таблицы умножения.')
+class ItemDiscountReport(ItemDiscount):
+    parent_obj = None
+
+    @classmethod
+    def get_parent_data(cls):
+        print(f'Товар {cls.parent_obj.name} стоимостью {cls.parent_obj.price}')
+
+
 while True:
     try:
-        num_1, num_2 = tuple(input('Введите через пробел два числа: ').split())
-        num_1, num_2 = int(num_1), int(num_2)
+        name, price = input('Введите через пробел название и цену товара: ').split()
     except ValueError:
-        print('Вы ввели не число.\n')
+        print('Вы ввели не два параметра.\n')
     else:
-        print_multiply_table(num_1, num_2)
+        good_obj = ItemDiscount(name, price)
+        ItemDiscountReport.parent_obj = good_obj
+        ItemDiscountReport.get_parent_data()
         break
+
+# Не понял в этом задании зачем создавать объект родительского класса,
+# а потом вызывать метод дочернего, будто обратное наследование получается.
+# Сделал передачу объекта родительского класса как атрибут дочернего класса, а на сам метод
+# навесил декторатор @classmethod.

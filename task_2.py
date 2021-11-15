@@ -9,8 +9,7 @@ class ItemDiscountReport(ItemDiscount):
 
     @classmethod
     def get_parent_data(cls):
-        print(f'Товар {cls.parent_obj._ItemDiscount__name} стоимостью '
-              f'{cls.parent_obj._ItemDiscount__price}')
+        print(f'Товар {cls.parent_obj.__name} стоимостью {cls.parent_obj.__price}')
 
 
 while True:
