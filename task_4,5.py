@@ -27,8 +27,11 @@ def calculate_deposit(summ: float, term: int, fix_pay: float) -> float:
         24: 7.5
     }
 
-    correct_product = [i for i in [first_product, second_product, third_product]
-                       if i['begin_sum'] < summ < i['end_sum']][0]
+    if summ == 1000:
+        correct_product = first_product
+    else:
+        correct_product = [i for i in [first_product, second_product, third_product]
+                           if i['begin_sum'] < summ <= i['end_sum']][0]
     deposit_percent = 1 + correct_product[term]/100*term/MONTS_YEAR
 
     def count_percent():
