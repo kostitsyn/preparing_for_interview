@@ -1,24 +1,7 @@
-class ItemDiscount:
-    def __init__(self, name, price):
-        self.__name = name
-        self.__price = price
+import re
 
+my_num = '12*25'
+spam = re.findall('\d+$', my_num)
+print(spam)
 
-class ItemDiscountReport(ItemDiscount):
-    parent_obj = None
-
-    @classmethod
-    def get_parent_data(cls):
-        print(f'Товар {cls.parent_obj.__name} стоимостью {cls.parent_obj.__price}')
-
-
-while True:
-    try:
-        name, price = input('Введите через пробел название и цену товара: ').split()
-    except ValueError:
-        print('Вы ввели не два параметра.\n')
-    else:
-        good_obj = ItemDiscount(name, price)
-        ItemDiscountReport.parent_obj = good_obj
-        ItemDiscountReport.get_parent_data()
-        break
+input_num = input('Введите число: ')
