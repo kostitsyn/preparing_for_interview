@@ -1,38 +1,30 @@
-class ItemDiscount:
-    def __init__(self, name, price):
-        self.__name = name
-        self.__price = price
+import random
+import pathlib
+import re
 
-    def set_price(self, new_price):
-        try:
-            new_price = float(new_price)
-        except ValueError:
-            print('Вы указали не число')
-        else:
-            if new_price >= 0:
-                self.__price = new_price
-            else:
-                print('Вы указали отрцательное число')
+KEYWORD = 'example'
+REPLACE_KEYWORD = 'sample'
 
 
-class ItemDiscountReport(ItemDiscount):
-    parent_obj = None
+def write_file():
+    dir_path = pathlib.Path.cwd()
+    file_path = pathlib.Path(dir_path, 'file.txt')
+    with open(file_path, 'w') as f:
+        list_1 = [str(i) for i in 'abcdefg']
+        list_2 = [f'{KEYWORD}{i}' if round(random.random()) else i for i in [j for j in range(1, 8)]]
 
-    @classmethod
-    def get_parent_data(cls):
-        print(f'Товар {cls.parent_obj._ItemDiscount__name} стоимостью '
-              f'{cls.parent_obj._ItemDiscount__price}')
+        res = zip(list_1, list_2)
+        for i in res:
+            f.write(f'{i[0]}: {i[1]}\n')
+    read_file(file_path)
 
 
-while True:
-    try:
-        name, price = input('Введите через пробел название и цену товара: ').split()
-    except ValueError:
-        print('Вы ввели не два параметра.\n')
-    else:
-        good_obj = ItemDiscount(name, price)
-        new_price = input("Введите новую цену: ")
-        good_obj.set_price(new_price)
-        ItemDiscountReport.parent_obj = good_obj
-        ItemDiscountReport.get_parent_data()
-        break
+def read_file(file_path):
+    with open(file_path) as f:
+        for line in f:
+            if line.find(KEYWORD) != -1:
+                line = line.replace(KEYWORD, REPLACE_KEYWORD)
+                if re.search('\w', line) and re.search('\d', line):
+                    print(line, end='')
+
+write_file()

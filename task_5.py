@@ -1,61 +1,18 @@
-class ItemDiscount:
-    def __init__(self, name, price):
-        self.__name = name
-        self.__price = price
+"""
+Скрипт поиска полного пути до файла.
+"""
 
-    def set_price(self, new_price):
-        try:
-            new_price = float(new_price)
-        except ValueError:
-            print('Вы указали не число')
-        else:
-            if new_price >= 0:
-                self.__price = new_price
-            else:
-                print('Вы указали отрцательное число')
+import os
 
 
-class ItemDiscountReport(ItemDiscount):
-    parent_obj = None
-
-    def __init__(self, discount):
-        super().__init__(self.parent_obj._ItemDiscount__name,
-                         self.parent_obj._ItemDiscount__price)
-        self.discount = discount
-
-    def __str__(self):
-        return f'Цена товара со скидкой: ' \
-               f'{round((self.parent_obj._ItemDiscount__price * (1-self.discount/100)), 2)}'
-
-    @classmethod
-    def get_parent_data(cls):
-        print(f'Товар {cls.parent_obj._ItemDiscount__name} стоимостью '
-              f'{cls.parent_obj._ItemDiscount__price}')
+def get_data(file):
+    for root, dirs, files in os.walk('.'):
+        for name in files:
+            if name == file:
+                spam = os.path.abspath(os.path.join(root))
+                eggs = name.rfind('.')
+                file_name = name[:eggs]
+                print(f'Путь до файла: {spam}\nИмя файла: {file_name}\n')
 
 
-while True:
-    try:
-        name, price = input('Введите через пробел название и цену товара: ').split()
-        price = float(price)
-    except ValueError:
-        print('Вы ввели не два параметра.\n')
-    else:
-        good_obj = ItemDiscount(name, price)
-        new_price = input("Введите новую цену: ")
-        good_obj.set_price(new_price)
-        ItemDiscountReport.parent_obj = good_obj
-        ItemDiscountReport.get_parent_data()
-        while True:
-            try:
-                discount = input('Введите скидку: ')
-                discount = float(discount)
-            except ValueError:
-                print('Вы ввели не число\n')
-            else:
-                if 0 < discount < 100:
-                    report_obj = ItemDiscountReport(discount)
-                    print(str(report_obj))
-                    break
-                else:
-                    print('Вы ввели неверное значение скидки\n')
-        break
+get_data('task_1.py')

@@ -6,7 +6,7 @@ import os
 
 
 def get_data(file):
-    for root, dirs, files in os.walk('../..'):
+    for root, dirs, files in os.walk('.'):
         for name in files:
             if name == file:
                 spam = os.path.abspath(os.path.join(root))
