@@ -1,7 +1,0 @@
-a: 1
-b: example2
-c: example3
-d: example4
-e: 5
-f: 6
-g: example7
