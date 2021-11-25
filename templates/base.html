@@ -9,6 +9,11 @@
 </head>
 <body>
     <div class="container w-75 mx-auto">
+            <a href="{% url 'mainapp:goods' %}">Все</a>
+        </select>
+        {% for catalog in catalogs %}
+                    <a href="{% url 'mainapp:category' catalog.uuid %}">{{ catalog.name }}</a>
+        {% endfor %}
         {% block content %}
         {% endblock %}
     </div>

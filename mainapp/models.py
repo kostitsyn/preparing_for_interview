@@ -2,8 +2,21 @@ from django.db import models
 from uuid import uuid4
 
 
+class Catalog(models.Model):
+    uuid = models.UUIDField(primary_key=True, default=uuid4)
+    name = models.CharField(max_length=128, verbose_name='Название каталога')
+
+    class Meta:
+        verbose_name = 'Каталог'
+        verbose_name_plural = 'Каталоги'
+
+    def __str__(self):
+        return self.name
+
+
 class Product(models.Model):
     uuid = models.UUIDField(primary_key=True, default=uuid4)
+    catalog = models.ManyToManyField(Catalog, related_name='product', blank=True, verbose_name='Каталог')
     name = models.CharField(max_length=128, verbose_name='Название товара')
     delivery_date = models.DateTimeField(auto_now_add=True, verbose_name='Дата поступления')
     price = models.DecimalField(max_digits=8, decimal_places=2, verbose_name='Цена')
