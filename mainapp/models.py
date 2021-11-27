@@ -16,7 +16,7 @@ class Catalog(models.Model):
 
 class Product(models.Model):
     uuid = models.UUIDField(primary_key=True, default=uuid4)
-    catalog = models.ManyToManyField(Catalog, related_name='product', blank=True, verbose_name='Каталог')
+    catalogs = models.ManyToManyField(Catalog, related_name='products', blank=True, verbose_name='Каталог')
     name = models.CharField(max_length=128, verbose_name='Название товара')
     delivery_date = models.DateTimeField(auto_now_add=True, verbose_name='Дата поступления')
     price = models.DecimalField(max_digits=8, decimal_places=2, verbose_name='Цена')
