@@ -3,14 +3,22 @@ class ItemDiscount:
         self.__name = name
         self.__price = price
 
+    @property
+    def name(self):
+        return self.__name
+
+    @property
+    def price(self):
+        return self.__price
+
 
 class ItemDiscountReport(ItemDiscount):
     parent_obj = None
 
     @classmethod
     def get_parent_data(cls):
-        print(f'Товар {cls.parent_obj._ItemDiscount__name} стоимостью '
-              f'{cls.parent_obj._ItemDiscount__price}')
+        print(f'Товар {cls.parent_obj.name} стоимостью '
+              f'{cls.parent_obj.price}')
 
 
 while True:
