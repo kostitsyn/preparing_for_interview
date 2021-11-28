@@ -1,10 +1,15 @@
 from django.db import models
 from uuid import uuid4
+from django.contrib.sites.models import Site
+from django.contrib.sites.managers import CurrentSiteManager
 
 
 class Catalog(models.Model):
     uuid = models.UUIDField(primary_key=True, default=uuid4)
     name = models.CharField(max_length=128, verbose_name='Название каталога')
+    site = models.ForeignKey(Site, on_delete=models.CASCADE, null=True)
+    objects = models.Manager()
+    on_site = CurrentSiteManager()
 
     class Meta:
         verbose_name = 'Каталог'
@@ -22,6 +27,9 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=8, decimal_places=2, verbose_name='Цена')
     unit_of_measure = models.CharField(max_length=64, verbose_name='Единица измерения')
     producer = models.CharField(max_length=256, verbose_name='Производитель')
+    site = models.ManyToManyField(Site)
+    objects = models.Manager()
+    on_site = CurrentSiteManager()
 
     class Meta:
         verbose_name = 'Продукт'

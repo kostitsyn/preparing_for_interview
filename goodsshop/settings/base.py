@@ -14,21 +14,20 @@ from pathlib import Path
 import json
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-
-file_path = os.path.join(BASE_DIR, 'secret.json')
-if os.path.exists(file_path):
-    with open('secret.json') as f:
-        data = json.load(f)
-        SECRET_KEY = data['SECRET_KEY']
-else:
-    SECRET_KEY = ''
+# file_path = os.path.join(BASE_DIR, 'secret.json')
+# if os.path.exists(file_path):
+#     with open('secret.json') as f:
+#         data = json.load(f)
+#         SECRET_KEY = data['SECRET_KEY']
+# else:
+#     SECRET_KEY = ''
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -45,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'mainapp',
 ]
 
@@ -56,6 +56,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.contrib.sites.middleware.CurrentSiteMiddleware'
 ]
 
 ROOT_URLCONF = 'goodsshop.urls'
@@ -108,6 +109,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+SITE_ID = 1
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
