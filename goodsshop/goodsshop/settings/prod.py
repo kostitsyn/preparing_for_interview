@@ -1,5 +1,5 @@
 from .base import *
 
 DEBUG = False
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['*']
 SECRET_KEY = os.environ.get('SECRET_KEY')

@@ -16,10 +16,9 @@ services:
     build:
       context: ./goodsshop
     environment:
-      SECRET_KEY: django-insecure-xfl@(vur%7&g!@9wn(rf0_2rtektuca^=1owsaaox2$p#r9yyn
       DJANGO_SETTINGS_MODULE: goodsshop.settings.container_prod
-    ports:
-      - 8080:8080
+    expose:
+      - 8080
     command: bash -c "
       python3 manage.py migrate
       && gunicorn goodsshop.wsgi -b 0.0.0.0:8080
@@ -31,6 +30,6 @@ services:
     build:
       context: ./nginx
     ports:
-      - 8000:8000
+      - 8020:8001
     depends_on:
       - backend

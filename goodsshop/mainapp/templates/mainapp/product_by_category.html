@@ -8,6 +8,7 @@
             <th>Цена</th>
             <th>Единицы измерения</th>
             <th>Производитель</th>
+            <th>Изображение</th>
         </tr>
         {% for object in object_list %}
             <tr>
@@ -16,6 +17,7 @@
                 <td>{{ object.price }}</td>
                 <td>{{ object.unit_of_measure }}</td>
                 <td>{{ object.producer }}</td>
+                <td>{{ object.image }}</td>
             </tr>
         {% endfor %}
     </table>

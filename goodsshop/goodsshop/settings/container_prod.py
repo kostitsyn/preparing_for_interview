@@ -1,7 +1,7 @@
 from .prod import *
 
-# DEBUG = True
-
+DEBUG = True
+SECRET_KEY = 'django-insecure-xfl@(vur%7&g!@9wn(rf0_2rtektuca^=1owsaaox2$p#r9yyn'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -16,3 +16,4 @@ DATABASES = {
 }
 
 STATIC_ROOT = os.path.join(BASE_DIR, '..', 'nginx', 'static')
+MEDIA_ROOT = os.path.join(BASE_DIR, '..', 'nginx', 'media')

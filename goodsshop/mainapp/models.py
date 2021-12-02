@@ -27,6 +27,7 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=8, decimal_places=2, verbose_name='Цена')
     unit_of_measure = models.CharField(max_length=64, verbose_name='Единица измерения')
     producer = models.CharField(max_length=256, verbose_name='Производитель')
+    image = models.ImageField(upload_to='product_images', null=True, verbose_name='Изображение товара')
     site = models.ManyToManyField(Site)
     objects = models.Manager()
     on_site = CurrentSiteManager()
