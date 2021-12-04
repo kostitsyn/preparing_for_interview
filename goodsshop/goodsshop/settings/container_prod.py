@@ -16,4 +16,3 @@ DATABASES = {
 }
 
 STATIC_ROOT = os.path.join(BASE_DIR, '..', 'nginx', 'static')
-MEDIA_ROOT = os.path.join(BASE_DIR, '..', 'nginx', 'media')

@@ -17,8 +17,8 @@ services:
       context: ./goodsshop
     environment:
       DJANGO_SETTINGS_MODULE: goodsshop.settings.container_prod
-    expose:
-      - 8080
+    ports:
+      - 8080:8080
     command: bash -c "
       python3 manage.py migrate
       && gunicorn goodsshop.wsgi -b 0.0.0.0:8080
@@ -30,6 +30,11 @@ services:
     build:
       context: ./nginx
     ports:
-      - 8020:8001
+      - 8000:8000
+    volumes:
+      - ./goodsshop/media:/media
     depends_on:
       - backend
+#volumes:
+#  media:
+#    driver: local

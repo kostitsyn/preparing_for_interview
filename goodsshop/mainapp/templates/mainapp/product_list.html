@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% load static %}
-{% load my_tags %}
 {% block content %}
     <table class="table table-success table-striped mt-5">
         <tr>
@@ -19,8 +18,7 @@
                 <td>{{ object.price }}</td>
                 <td>{{ object.unit_of_measure }}</td>
                 <td>{{ object.producer }}</td>
-                <td><img src="{{ object.image|media_folder_product }}" alt="{{ object.image }}"></td>
-{#            <img class="other-img" src="{% static 'img/product_page/assasin-3.jpg' %}" alt="img3">#}
+                <td><img class="product-image" src="/media/{{ object.image }}" alt="/media/{{ object.image }}"></td>
                 <td>
                     {% for catalog in object.catalogs.all %}
                         {{ catalog.name }}
