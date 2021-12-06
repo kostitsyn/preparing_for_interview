@@ -109,7 +109,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-SITE_ID = 2
+SITE_ID = 3
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/

@@ -12,7 +12,7 @@
             <a href="{% url 'mainapp:goods' %}">Все</a>
         </select>
         {% for catalog in catalogs %}
-                    <a href="{% url 'mainapp:category' catalog.uuid %}">{{ catalog.name }}</a>
+                    <a class="catalog-item" href="{% url 'mainapp:category' catalog.uuid %}">{{ catalog.name }}</a>
         {% endfor %}
         {% block content %}
         {% endblock %}

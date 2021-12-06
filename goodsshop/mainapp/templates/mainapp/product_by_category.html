@@ -17,7 +17,7 @@
                 <td>{{ object.price }}</td>
                 <td>{{ object.unit_of_measure }}</td>
                 <td>{{ object.producer }}</td>
-                <td>{{ object.image }}</td>
+                <td><img class="product-image" src="/media/{{ object.image }}" alt="/media/{{ object.image }}"></td>
             </tr>
         {% endfor %}
     </table>
