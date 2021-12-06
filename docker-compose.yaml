@@ -1,0 +1,39 @@
+version: '3.1'
+
+services:
+  db:
+    image: postgres:14.1
+    privileged: true
+    restart: always
+    ports:
+      - 54321:5432
+    environment:
+      POSTGRES_USER: django
+      POSTGRES_PASSWORD: geekbrains
+      POSTGRES_DB: goodsshop
+
+  backend:
+    build:
+      context: ./goodsshop
+    environment:
+      DJANGO_SETTINGS_MODULE: goodsshop.settings.container_prod
+    ports:
+      - 8080:8080
+    command: bash -c "
+      python3 manage.py migrate
+      && gunicorn goodsshop.wsgi -b 0.0.0.0:8080
+      "
+    depends_on:
+      - db
+
+  nginx:
+    build:
+      context: ./nginx
+    ports:
+      - 8000:8000
+    volumes:
+      - media:/home/aleksandr/Documents/preparing_for_interview/django_project/media
+    depends_on:
+      - backend
+volumes:
+  media:
