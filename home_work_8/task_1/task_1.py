@@ -15,13 +15,16 @@ URLS = [
 async def call_url(url: str) -> None:
     """
     Спарсить страницу и записать результат в файл.
+    :param url: (str) Адрес страницы конкретного каталога.
+    :return:
     """
 
     async with aiohttp.ClientSession() as session:
         async with session.get(url) as response:
             data = await response.text()
-            with open(f'./task_1/file_{URLS.index(url)+1}.html', 'w') as f:
+            with open(f'file_{URLS.index(url)+1}.html', 'w') as f:
                 f.write(data)
+            print('Данные в файлы успешно записаны!')
 
 futures = [call_url(url) for url in URLS]
 loop = asyncio.get_event_loop()

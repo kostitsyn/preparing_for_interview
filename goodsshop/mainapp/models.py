@@ -7,7 +7,7 @@ from django.contrib.sites.managers import CurrentSiteManager
 class Catalog(models.Model):
     uuid = models.UUIDField(primary_key=True, default=uuid4)
     name = models.CharField(max_length=128, verbose_name='Название каталога')
-    site = models.ManyToManyField(Site, null=True)
+    site = models.ManyToManyField(Site)
     objects = models.Manager()
     on_site = CurrentSiteManager()
 

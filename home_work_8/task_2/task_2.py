@@ -1,38 +1,33 @@
-import asyncio
+"""
+Скрипт парсинга страниц категорий goodsshop проекта с использованием BeatifulSoup.
+"""
 
-import requests
+import asyncio
 import aiohttp
 from bs4 import BeautifulSoup as bs
 
-HEADERS = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36'
-              ' (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36'}
 URL = 'http://127.0.0.1:8000'
 
 
-async def get_data(url):
+async def get_data(url: str) -> None:
+    """
+    Спарсить страницы каталогов и записать результат в файл.
+    :param url: (str) Корневой адрес ресурса.
+    :return:
+    """
+
     async with aiohttp.ClientSession() as session:
-        async with session.get(url) as response:
-            text = await response.text()
-            soup = bs(response, 'html.parser')
-            print()
-
-
+        async with session.get(url) as main_page_response:
+            main_page_text = await main_page_response.text()
+            soup = bs(main_page_text, 'html.parser')
+            links = soup.findAll('a', {'class': 'catalog-item'})
+            for index, tag in enumerate(links):
+                link_path = tag['href']
+                async with session.get(f'{url}{link_path}') as item_catalog_response:
+                    text_in_links = await item_catalog_response.text()
+                    with open(f'file_{index+1}.html', 'w') as f:
+                        f.write(text_in_links)
+            print('Данные в файлы успешно записаны!')
 
 loop = asyncio.get_event_loop()
 loop.run_until_complete(get_data(URL))
-
-
-# session = aiohttp.ClientSession()
-#
-#
-#
-# response = session.get(URL)
-# soup = bs(response.text(), 'html.parser')
-# spam = soup.findAll('a', {'class': 'catalog-item'})
-# for i, j in enumerate(spam):
-#     a = j['href']
-#     eggs = requests.get(f'{URL}{a}')
-#     foo = bs(eggs.text, 'html.parser')
-#     with open(f'file_{i+1}.html', 'w') as f:
-#         f.write(eggs.text)
-#     print()
